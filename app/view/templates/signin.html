@@ -1,11 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-	<h1>sign in</h1>
-	<form action='/signin' method='POST'>
-		<input type="email" name="userEmail" placeholder="Email"/>
-		<input type="password" name="userPassword" placeholder="Password"/>
-		<button type="submit">signin</button>
-	</form>	
-<div>
+	<div class="row">
+		<div class="col"></div>
+		<div class="col-6">
+			<form class="form-group row" action='/signin' method='POST'>
+				<h1 class="col-10" style="font-size: 3vw">Login</h1>
+				<p style="margin-top: 35px"></p>
+				<input class="form-control col-10" style="font-size: 1.5vw" type="email" name="userEmail" placeholder="Email"/>
+				<p style="margin-top: 50px"></p>
+				<input class="form-control col-10" style="font-size: 1.5vw" type="password" name="userPassword" placeholder="Password"/>
+				<p style="margin-top: 50px"></p>
+				<button class="form-control col-10 text-white bg-dark" style="font-size: 1.5vw" type="submit">Login</button>
+				<p style="margin-top: 45px"></p>
+				<p class="col-9 text-right text-dark-50" style="font-size: 0.8vw">Aren't you a member?</p>
+				<a class="align-right" style="font-size: 0.8vw" href="/signup">signup</a>
+			</form>	
+		</div>
+		<div class="col"></div>
+	</div>
+</div>
 {% endblock content %}
