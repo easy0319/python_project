@@ -20,10 +20,12 @@ def signup():
 			info = session['userEmail'].split('@')
 			return render_template('welcome.html', info = info[0])
 		else:
-			users.userCreate(request.form.to_dict(flat='true'))
-			session['userEmail'] = request.form['userEmail']
-			info = session['userEmail'].split('@')
-			return render_template('welcome.html', info = info[0])
+			if users.userCreate(request.form.to_dict(flat='true')):
+				session['userEmail'] = request.form['userEmail']
+				info = session['userEmail'].split('@')
+				return render_template('welcome.html', info = info[0])
+			else:
+				return render_template('signup.html')
 
 @usersAPI.route('/')
 def base():
@@ -46,14 +48,17 @@ def signin():
 			info = session['userEmail'].split('@')
 			return render_template('welcome.html', info = info[0])
 		else:
-			users.userAuthentication(request.form.to_dict(flat='true'))
-			session['userEmail'] = request.form['userEmail']
-			info = session['userEmail'].split('@')
-			return render_template('welcome.html', info = info[0])
+			if users.userAuthentication(request.form.to_dict(flat='true')):
+				session['userEmail'] = request.form['userEmail']
+				info = session['userEmail'].split('@')
+				return render_template('welcome.html', info = info[0])
+			else:
+				return render_template('signin.html')
+				
 
 @usersAPI.route('/logout')
 def logout():
 	if 'userEmail' in session:
 		session.pop('userEmail')
-		return redirect(url_for('usersAPI.signin'))
+		return render_template('welcome.html')
 	return redirect(url_for('usersAPI.signin'))
