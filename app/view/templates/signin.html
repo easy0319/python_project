@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+{%block content %}
+<div class="container">
+    <h1>sign in</h1>
+    <form action='/signin' method='POST'>
+        <ul class="nav flex-column">
+        <input type="email" name="userEmail" placeholder="Email"/>
+        <input type="password" name="userPassword" placeholder="Password"/>
+        <button type="submit">signin</button>
+        </ul>
+    </form>
+<div>
+{%endblock content %}
