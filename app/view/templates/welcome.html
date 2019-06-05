@@ -5,12 +5,14 @@
         <div class="col-md-3 form-control jumbotron shadow-lg text-center" style="height: auto; max-height: 380px; max-width: 80%">
 			<img src="static/img/photo.jpeg" alt="photo" style="max-width: 35%; height: auto; border-radius: 50%;"/>
 			<p></p>
-			<h5>My Name</h5>
+			<h5>Ji-hyeon Lee<br/>
+                Geun-hyeok Oh
+            </h5>
 			<blockquote class="blockquote text-black-50">
 				<p class="mb-0">beginner programer</p>
 				<p class="mb-0">screendoor</p>
 				<p></p>
-				<p class="mb-0">python project</p>
+				<p class="mb-0">My Portfolio</p>
 			</blockquote>
 		</div>
         <table class="col-md-8 table table-bordered">
@@ -37,16 +39,22 @@
             {% endfor %}
         </table>
 	</div>
-    
+    <p/>
     {% if session.userEmail == 'admin@admin'%}
     <div class="row justify-content-around">
         <div class="col-md-3" style="text-align: center">
-            <a href="/" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Update</a>
+            <a href="/" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Edit</a>
             </div>
         <div class="col-md-8" style="text-align: center">
             <a href="/post" class="btn btn-secondary btn-lg active text-right" role="button" aria-pressed="true">Posting</a>
             <div>
     </div>
     {% endif %}
+    <p/>
+    <div class="row justify-content-around">
+        <div class="col-md" style="text-align: center">
+            <a href="/posting" class="btn btn-secondary btn-lg active text-right" role="button" aria-pressed="true">Update</a>
+            <div>
+    </div>
 </div>
 {% endblock content %}

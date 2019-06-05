@@ -17,3 +17,9 @@ class Posts():
             return posts
         except:
             return False
+
+    def postAuthentication(self, postDict):
+        if self.posts.find_one(postDict) is not None:
+            return True
+        else:
+            return False

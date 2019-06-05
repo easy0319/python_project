@@ -11,10 +11,18 @@ def post():
     if 'userEmail' in session:
         info = session['userEmail'].split('@')
         return render_template('post.html', info = info[0])
+    else:
+        return redirect(url_for('userAPI.signin'))
 
 @postsAPI.route('/', methods=['GET'])
 def base():
-    return render_template('posting.html')
+    if request.method == 'GET':
+        if 'userEmail' in session:
+            post = posts.postValidation()
+            info = session['userEmail'].split('@')
+            return render_template('welcome.html', info = info[0], post = post)
+    else:
+        return redirect(url_for('userAPI.signin'))
 
 @postsAPI.route('/posting', methods=['GET', 'POST'])
 def posting():
@@ -24,7 +32,7 @@ def posting():
             info = session['userEmail'].split('@')
             return render_template('welcome.html', info = info[0], post = post)
         else:
-            return redirect(url_for('userAPI.login'))
+            return redirect(url_for('userAPI.signin'))
 
     if request.method == 'POST':
         if 'userEmail' in session:
@@ -33,7 +41,7 @@ def posting():
                 info = session['userEmail'].split('@')
                 return render_template('welcome.html', info = info[0], post = post)
         else:
-            return redirect(url_for('userAPI.login'))
+            return redirect(url_for('userAPI.signin'))
 
 @postsAPI.route('/postview', methods=['GET'])
 def postview():
@@ -41,3 +49,6 @@ def postview():
         info = session['userEmail'].split('@')
         post = posts.postValidation()
         return render_template('postview.html', info = info[0], post = post)
+    else:
+        return redirect(url_for('userAPI.signin'))
+
