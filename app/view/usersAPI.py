@@ -28,12 +28,6 @@ def signup():
 				return render_template('signup.html')
 
 @usersAPI.route('/')
-def base():
-	if 'userEmail' in session:
-		info = session['userEmail'].split('@')
-		return render_template('welcome.html', info = info[0])
-	return render_template('welcome.html')
-
 @usersAPI.route('/signin', methods=['GET', 'POST'])
 def signin():
 	if request.method == 'GET':
