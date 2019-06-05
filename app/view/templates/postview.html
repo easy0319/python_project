@@ -5,12 +5,14 @@
         <div class="col"></div>
         <div class="col-6">
             <form class="form-group row" method="POST" action="/posting">
-                <h1 class="col-10" style="font-size: 3vw">Posting</h1>
+                <h1 class="col-10" style="font-size: 3vw">PostView</h1>
                 <p style="margin-top: 35px"></p>
                 <textarea class="form-control col-10" style="font-size: 1.5vw" type="text" name="title">{{post.title}}</textarea>
                 <textarea class="form-control col-10" style="font-size: 1.5vw; height: 400px" type="text" name="contents">{{post.contents}}</textarea>
+                {% if session.userEmail == 'admin@admin' %}
                 <a href="/post" class="btn btn-secondary btn-lg active col-5" role="button" aria-pressed="true">Update</a>
                 <a href="/post" class="btn btn-secondary btn-lg active col-5" role="button" aria-pressed="true">Remove</a>
+                {% endif %}
             </form>
         </div>
         <div class="col"></div>
