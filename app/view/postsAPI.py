@@ -39,10 +39,10 @@ def posting():
 
     if request.method == 'POST':
         if 'userEmail' in session:
-                posts.postCreate(request.form.to_dict(flat='true'))
-                post = posts.postValidation()
-                info = session['userEmail'].split('@')
-                return render_template('welcome.html', info = info[0], post = post)
+            posts.postCreate(request.form.to_dict(flat='true'))
+            post = posts.postValidation()
+            info = session['userEmail'].split('@')
+            return render_template('welcome.html', info = info[0], post = post)
         else:
             post = posts.postValidation()
             return render_template('welcome.html', post = post)
@@ -56,5 +56,4 @@ def postview():
     else:
         post = posts.postValidation()
         return render_template('welcome.html', post = post)
-
 
