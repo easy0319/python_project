@@ -51,7 +51,7 @@ def posting():
 def postview():
     if 'userEmail' in session:
         info = session['userEmail'].split('@')
-        post = posts.postValidation()
+        post = posts.postAuthentication(request.form.to_dict(flat='true'))
         return render_template('postview.html', info = info[0], post = post)
     else:
         post = posts.postValidation()
