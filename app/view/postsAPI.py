@@ -12,7 +12,8 @@ def post():
         info = session['userEmail'].split('@')
         return render_template('post.html', info = info[0])
     else:
-        return redirect(url_for('userAPI.signin'))
+        post = posts.postValidation()
+        return render_template('welcome.html', post = post)
 
 @postsAPI.route('/', methods=['GET'])
 def base():
@@ -21,8 +22,9 @@ def base():
             post = posts.postValidation()
             info = session['userEmail'].split('@')
             return render_template('welcome.html', info = info[0], post = post)
-    else:
-        return redirect(url_for('userAPI.signin'))
+        else:
+            post = posts.postValidation()
+            return render_template('welcome.html', post = post)
 
 @postsAPI.route('/posting', methods=['GET', 'POST'])
 def posting():
@@ -32,7 +34,8 @@ def posting():
             info = session['userEmail'].split('@')
             return render_template('welcome.html', info = info[0], post = post)
         else:
-            return redirect(url_for('userAPI.signin'))
+            post = posts.postValidation()
+            return render_template('welcome.html', post = post)
 
     if request.method == 'POST':
         if 'userEmail' in session:
@@ -41,14 +44,17 @@ def posting():
                 info = session['userEmail'].split('@')
                 return render_template('welcome.html', info = info[0], post = post)
         else:
-            return redirect(url_for('userAPI.signin'))
+            post = posts.postValidation()
+            return render_template('welcome.html', post = post)
 
 @postsAPI.route('/postview', methods=['GET'])
 def postview():
     if 'userEmail' in session:
         info = session['userEmail'].split('@')
-        post = posts.postValidation()
+        post = posts.postAuthentication(request.form.to_dict(flat='true'))
         return render_template('postview.html', info = info[0], post = post)
     else:
-        return redirect(url_for('userAPI.signin'))
+        post = posts.postValidation()
+        return render_template('welcome.html', post = post)
+
 

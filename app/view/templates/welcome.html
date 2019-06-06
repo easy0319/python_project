@@ -19,7 +19,8 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col" style="text-align: center">#</th>
-                    <th scope="col" style="width: 500px; text-align: center">제목</th>
+                    <th scope="col" style="width: 300px; text-align: center">제목</th>
+                    <th scope="col" style="width: 500px; text-align: center">내용</th>
                     <th scope="col" style="text-align: center">날짜</th>
                 </tr>
             </thead>
@@ -29,9 +30,12 @@
                 <tr>
                     <th scope="row" style="text-align: center">#</th>
                     <td>
-                        <a href="/postview">
+                        <a href="/postview" method="POST">
                             {{i.title}}
                         </a>
+                    </td>
+                    <td>
+                        {{i.contents}}
                     </td>
                     <td style="text-align: center">2019-06-06</td>
                 </tr>
@@ -53,7 +57,7 @@
     <p/>
     <div class="row justify-content-around">
         <div class="col-md" style="text-align: center">
-            <a href="/posting" class="btn btn-secondary btn-lg active text-right" role="button" aria-pressed="true">Update</a>
+            <a href="/" class="btn btn-secondary btn-lg active text-right" role="button" aria-pressed="true">Update</a>
             <div>
     </div>
 </div>
