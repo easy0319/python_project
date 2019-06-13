@@ -48,8 +48,7 @@ def postUpdate():
         return redirect(url_for('postsAPI.base'))
     else:
         return redirect(url_for('postsAPI.base'))
-
-
+      
 @postsAPI.route('/post/delete', methods=['POST'])
 def postDelete():
     if 'userEmail' in session and session['userEmail'] == 'admin@admin':
