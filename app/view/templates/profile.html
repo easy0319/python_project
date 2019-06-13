@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='container text-center' style="margin-top: -50px">
+    <h style="font-size: 2em;">Edit Profile</h> 
+    <div class="form-control jumbotron shadow-lg" style="height: 700px; width: 450px; margin: auto;">
+        <form class="form-group" action='/profile' method='POST'>
+            <img src="static/img/photo.jpeg" alt="photo" style="max-width: 35%; height: auto; border-radius: 50%;"/>
+            
+            {% for profile in profile %}            
+                <p style="margin-top: 35px"></p>
+                <!-- <h style="font-size: 1.5vw">Name</h>                     -->
+                <textarea class="form-control" type="text" name="profileName1" style="font-size: 1em">{{profile.profileName1}}</textarea>
+                
+                <p style="margin-top: 35px"></p>
+                <!-- <h style="font-size: 1.5vw">Name</h>    -->
+                <textarea class="form-control" type="text" name="profileName2" style="font-size: 1em">{{profile.profileName2}}</textarea>
+                
+                <p style="margin-top: 35px"></p>
+                <!-- <h style="font-size: 1.5vw">Contents</h>    -->
+                <textarea class="form-control" type="text" name="profileContents" style="font-size: 1em">{{profile.profileContents}}</textarea>
+                
+                <p style="margin-top: 35px"></p>
+                <!-- <h style="font-size: 1.5vw">Title</h>    -->
+                <textarea class="form-control" type="text" name="profileTitle" style="font-size: 1em">{{profile.profileTitle}}</textarea>
+            {% endfor %}
+
+            <p style="margin-top: 35px"></p>
+            <button class="form-control text-white bg-dark" style="font-size: 1.5em" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
