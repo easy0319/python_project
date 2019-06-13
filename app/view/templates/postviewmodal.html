@@ -1,0 +1,36 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-dark btn-sm float-right" style="margin-right:5px;" data-toggle="modal" data-target="#moreModal">
+        more
+        </button>
+    
+        <!-- Modal -->
+        <div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="moreModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+              
+              <div class="modal-header">
+                <h5 class="modal-title" id="moreModalLabel">{{post.postTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <!-- <label for="postContent">Content</label> -->
+                    <p class="form-control" style="height: 150px;">{{post.postContent}}</p>
+                  </div>
+                </form>
+                <label style="margin-bottom: -15px" for="postComments">Comments</label>
+              </div>
+              
+              <div class="modal-footer">
+                
+                {% if session.userEmail == 'admin@admin' %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        
