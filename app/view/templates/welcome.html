@@ -17,6 +17,10 @@
                     <p class="mb-0">{{profile.profileTitle}}</p>
                 </blockquote>
             {% endfor %}
+                
+            {% if session.userEmail == 'admin@admin'%}
+                <a href="/profile" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Edit Profile</a>
+            {% endif%}
         </div>
         
         <div class="col-md-8">
@@ -25,24 +29,23 @@
                     {% include "postview.html" %}
                 {% endwith %}
             </div>
+            {% if postcount > 6 %}
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="#1">1</a></li>
+                <li class="page-item"><a class="page-link" href="#2">2</a></li>
+            </ul>
+            {% endif %}
         </div>
 	</div>
     <p/>
     {% if session.userEmail == 'admin@admin'%}
     <div class="row justify-content-around">
         <div class="col-md-3" style="text-align: center">
-            <a href="/profile" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">Edit Profile</a>
             </div>
         <div class="col-md-8" style="text-align: center">
             <a href="/posting" class="btn btn-secondary btn-lg text-right" role="button" aria-pressed="true">Posting</a>
             <div>
     </div>
     {% endif %}
-    <!-- <p/>
-    <div class="row justify-content-around">
-        <div class="col-md" style="text-align: center">
-            <a href="/" class="btn btn-secondary btn-lg active text-right" role="button" aria-pressed="true">Update</a>
-            <div>
-    </div> -->
 </div>
 {% endblock content %}
