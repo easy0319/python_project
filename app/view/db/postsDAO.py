@@ -29,7 +29,22 @@ class Posts():
 
 	def getAllposts(self):
 		try:
-			result = self.posts.find({})
+			result = self.posts.find().sort("date",-1)
 			return result
 		except:
 			return False
+
+	def getPostsCount(self):
+		try:
+			result = self.posts.count()
+			return result
+		except:
+			return False
+
+	def getOneposts(self, title, content):
+		result = self.posts.find({"postTitle" : title, "postContent" : content})
+		if result is not None:
+			try:
+				return result
+			except:
+				return False

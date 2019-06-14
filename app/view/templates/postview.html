@@ -6,12 +6,9 @@
 
 
           {% if session.userEmail %}
-            {% include 'postviewmodal.html' %}
-
-            {% if session.userEmail == 'admin@admin' %}
-              {% include 'postdeletemodal.html' %}
-              {% include 'postupdatemodal.html' %}
-            {% endif %}
+            <button type="submit" class="btn btn-outline-dark btn-sm float-right" onclick="location.href='/postmore/{{post.postTitle}}/{{post.postContent}}'" style="margin-right:5px;">
+              more
+            </button>
           {% else %}
             <p class="card-text text-center">자세히 보려면 로그인 하세요.</p>
           {% endif %}

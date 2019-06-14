@@ -1,10 +1,10 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-dark btn-sm float-right" style="margin-right:5px;" data-toggle="modal" data-target="#moreModal">
+<button type="button" class="btn btn-outline-dark btn-sm float-right" style="margin-right:5px;" data-toggle="modal" data-target="#moreModal{{post._id}}">
         more
         </button>
     
         <!-- Modal -->
-        <div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="moreModalLabel" aria-hidden="true">
+        <div class="modal fade" id="moreModal{{post._id}}" tabindex="-1" role="dialog" aria-labelledby="moreModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
               
@@ -23,13 +23,17 @@
                   </div>
                 </form>
                 <label style="margin-bottom: -15px" for="postComments">Comments</label>
-              </div>
-              
-              <div class="modal-footer">
                 
-                {% if session.userEmail == 'admin@admin' %}
-                {% endif %}
+                <hr class="my-4">
+
+                <form class="row" action="/" method="">
+                  <input type="text" name="comments" class="form-control" id="comments" placeholder="Enter Comments." style="width: 92%; margin-left: 13px;margin-right: 5px">
+                  <button type="submit" class="btn btn-sm btn-secondary">regist</button>
+                </form>
               </div>
+              <!-- modal-footer
+              <div class="modal-footer">
+              </div> -->
             </div>
           </div>
         </div>
