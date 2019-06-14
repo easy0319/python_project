@@ -70,3 +70,15 @@ def postMore(postTitle, postContent):
         return render_template('postmore.html', post = post, info = info[0])
     else:
         return redirect(url_for('postsAPI.base'))
+
+@postsAPI.route('/post/comment/<string:postTitle>/<string:postContent>', methods=['POST'])
+def postComment(postTitle, postContent):
+    if 'userEmail' in session:
+        if request.form['postComment'] != '':
+            now = time.strftime("%Y-%m-%d %H:%M")
+            obj_id = posts.commentCreate(postTitle, postContent, {"postComment" : {"comment" : request.form['postComment'], "author" : session['userEmail'], "date" : now}})
+            return redirect(url_for('postsAPI.postMore',postTitle = postTitle, postContent = postContent))
+        else:
+            return redirect(url_for('postsAPI.postMore',postTitle = postTitle, postContent = postContent))
+    else:
+        return redirect(url_for('postsAPI.base'))

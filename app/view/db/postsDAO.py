@@ -48,3 +48,10 @@ class Posts():
 				return result
 			except:
 				return False
+
+	def commentCreate(self, title, content, commentDict):
+		try:
+			self.posts.update({"postTitle" : title, "postContent" : content}, { "$push" : commentDict})
+			return True
+		except:
+			return False
