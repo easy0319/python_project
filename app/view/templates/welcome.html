@@ -25,14 +25,24 @@
         
         <div class="col-md-8">
             <div class="row">
-                {% with post = post %}
+                {% with post = post|reverse %}
                     {% include "postview.html" %}
                 {% endwith %}
             </div>
             {% if postcount > 6 %}
             <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#1">1</a></li>
-                <li class="page-item"><a class="page-link" href="#2">2</a></li>
+                <li class="page-item">
+                    <button class="btn btn-outline-dark btn-sm page-link btn-hover" 
+                        onclick="location.href='/1'"
+                        style="color:black;
+                        margin-right:5px;
+                        border:1px solid black;">1</a></li>
+                <li class="page-item">
+                    <button class="btn btn-outline-dark btn-sm page-link btn-hover" 
+                        onclick="location.href='/2'"
+                        style="color:black;
+                        margin-right:5px;
+                        border:1px solid black;">2</a></li>        
             </ul>
             {% endif %}
         </div>

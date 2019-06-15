@@ -1,0 +1,28 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger btn-sm float-right" style="margin-right:5px; margin-top: -35px" data-toggle="modal" data-target="#removeCoModal{{post._id}}">
+    Delete
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="removeCoModal{{post._id}}" tabindex="-1" role="dialog" aria-labelledby="removeCoModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="removeCoModalLabel">Are you Sure?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            You can't resotre the comment after remove it.
+          </div>
+          <div class="modal-footer">
+            <form action="/comment/delete/{{post.postTitle}}/{{post.postContent}}" method="POST">
+              <input type="hidden" name="com_id" id="com_id" value="{{comment.comment}}">
+              <button type="submit" class="btn btn-danger">delete</button>
+              <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>

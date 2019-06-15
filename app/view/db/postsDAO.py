@@ -29,7 +29,8 @@ class Posts():
 
 	def getAllposts(self):
 		try:
-			result = self.posts.find().sort("date",-1)
+			#.sort("date",-1)
+			result = self.posts.find()
 			return result
 		except:
 			return False
@@ -52,6 +53,13 @@ class Posts():
 	def commentCreate(self, title, content, commentDict):
 		try:
 			self.posts.update({"postTitle" : title, "postContent" : content}, { "$push" : commentDict})
+			return True
+		except:
+			return False
+
+	def commentDelete(self, com_id):
+		try:
+			self.posts.delete_one({"postComment": {"comment" : com_id}})
 			return True
 		except:
 			return False
