@@ -26,6 +26,21 @@ def base():
             pro = profile.profileValidation()
             return render_template('welcome.html', post = post, postcount = postcount, profile = pro)
 
+@postsAPI.route('/<string:num>', methods=['GET'])
+def postPage(num):
+    if request.method == 'GET':
+        if 'userEmail' in session:
+            post = posts.getAllposts()
+            postcount = posts.getPostsCount()
+            pro = profile.profileValidation()
+            info = session['userEmail'].split('@')
+            return render_template('welcome.html', info = info[0], post = post, postcount = postcount, profile = pro)
+        else:
+            post = posts.getAllposts()
+            postcount = posts.getPostsCount()
+            pro = profile.profileValidation()
+            return render_template('welcome.html', post = post, postcount = postcount, profile = pro)
+
 @postsAPI.route('/posting', methods=['GET', 'POST'])
 def posting():
     if request.method == 'GET':
@@ -67,7 +82,7 @@ def postMore(postTitle, postContent):
     if 'userEmail' in session:
         post = posts.getOneposts(postTitle, postContent)
         info = session['userEmail'].split('@')
-        return render_template('postmore.html', post = post, info = info[0])
+        return render_template('postmore.html', post = post, info = info[0], commentInfo = session['userEmail'])
     else:
         return redirect(url_for('postsAPI.base'))
 
@@ -81,4 +96,13 @@ def postComment(postTitle, postContent):
         else:
             return redirect(url_for('postsAPI.postMore',postTitle = postTitle, postContent = postContent))
     else:
+        return redirect(url_for('postsAPI.base'))
+
+@postsAPI.route('/comment/delete/<string:postTitle>/<string:postContent>', methods=['POST'])
+def commentDelete(postTitle, postContent):
+    if 'userEmail' in session:
+        posts.commentDelete(request.form.to_dict(flat=True)["com_id"])
+        return redirect(url_for('postsAPI.postMore', postTitle = postTitle, postContent = postContent))
+    else:
+        print("안들어왔다")
         return redirect(url_for('postsAPI.base'))

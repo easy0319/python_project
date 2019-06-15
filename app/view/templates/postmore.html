@@ -28,6 +28,9 @@
                     <p class="" style="font-size: 1em">{{comment.author}}</p>
                     <p class="" style="font-size: 1em">{{comment.comment}}</p>
                     <p class="" style="font-size: 1em">{{comment.date}}</p>
+                    {% if commentInfo == comment.author %}
+                        {% include 'commentdelete.html' %}
+                    {% endif %}
                     <hr class="my-4">
                 </form>
             {% endfor %}

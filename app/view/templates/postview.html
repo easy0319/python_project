@@ -1,9 +1,10 @@
 {% for post in post %}
+{% if (request.path == '/') or (request.path == '/1') %}
+  {% if loop.index <= 6 %}
     <div class="card shadow-lg" style="width: 17rem; margin: 0.7em;">
         <img src="static/img/photo.jpeg" class="card-img-top" alt="photo" style="max-width: 35%; height: auto;"/>
         <div class="card-body">
           <h5 class="card-title">{{post.postTitle}}</h5>
-
 
           {% if session.userEmail %}
             <button type="submit" class="btn btn-outline-dark btn-sm float-right" onclick="location.href='/postmore/{{post.postTitle}}/{{post.postContent}}'" style="margin-right:5px;">
@@ -14,4 +15,23 @@
           {% endif %}
         </div>
     </div>
+  {% endif %}
+{% elif request.path == '/2' %}
+  {% if loop.index > 6 %}
+    <div class="card shadow-lg" style="width: 17rem; margin: 0.7em;">
+        <img src="static/img/photo.jpeg" class="card-img-top" alt="photo" style="max-width: 35%; height: auto;"/>
+        <div class="card-body">
+          <h5 class="card-title">{{post.postTitle}}</h5>
+
+          {% if session.userEmail %}
+            <button type="submit" class="btn btn-outline-dark btn-sm float-right" onclick="location.href='/postmore/{{post.postTitle}}/{{post.postContent}}'" style="margin-right:5px;">
+              more
+            </button>
+          {% else %}
+            <p class="card-text text-center">자세히 보려면 로그인 하세요.</p>
+          {% endif %}
+        </div>
+    </div>
+  {% endif %}
+{% endif %}
 {% endfor %}
