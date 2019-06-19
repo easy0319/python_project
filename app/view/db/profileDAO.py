@@ -18,6 +18,7 @@ class Profile():
     def profileInit(self):
         try:
             self.profile.insert_one({
+                "profileImg":"init.jpeg",
                 "profileName1":"Ji-hyeon Lee",
                 "profileName2":"Geun-hyeok Oh",
                 "profileContents":"beginner programer screendoor",
@@ -28,13 +29,23 @@ class Profile():
             return False
 
 
-    def profileUpdate(self, profileDict):
-        self.profile.update(
-            {"id": "1"},
-            {"$set":{"profileName1":profileDict["profileName1"], 
-            "profileName2":profileDict["profileName2"], 
-            "profileContents":profileDict["profileContents"], 
-            "profileTitle":profileDict["profileTitle"]}},
-            upsert=False)
+    def profileUpdate(self, file, profileDict):
+        if file == '':
+            self.profile.update(
+                {"id": "1"},
+                {"$set":{"profileName1":profileDict["profileName1"], 
+                "profileName2":profileDict["profileName2"], 
+                "profileContents":profileDict["profileContents"], 
+                "profileTitle":profileDict["profileTitle"]}},
+                upsert=False)
+        else:
+            self.profile.update(
+                {"id": "1"},
+                {"$set":{"profileImg":file,
+                "profileName1":profileDict["profileName1"], 
+                "profileName2":profileDict["profileName2"], 
+                "profileContents":profileDict["profileContents"], 
+                "profileTitle":profileDict["profileTitle"]}},
+                upsert=False)
         return True
         

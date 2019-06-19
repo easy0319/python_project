@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class='container text-center' style="margin-top: -50px">
+<div class='container text-center' style="margin-top: -70px">
     <h style="font-size: 2em;">Edit Profile</h> 
-    <div class="form-control jumbotron shadow-lg" style="height: 700px; width: 450px; margin: auto;">
-        <form class="form-group" action='/profile' method='POST'>
-            <img src="static/img/photo.jpeg" alt="photo" style="max-width: 35%; height: auto; border-radius: 50%;"/>
-            
-            {% for profile in profile %}            
+    <div class="form-control jumbotron shadow-lg" style="height: auto; width: 450px; margin: auto;">
+        <form class="form-group" action='/profile' method='POST', enctype="multipart/form-data">
+            {% for profile in profile %} 
+            <img src="static/img/{{profile.profileImg}}" alt="photo" style="max-width: 35%; height: auto; border-radius: 50%;"/>
+            <input type="file" value="file" name="file" style="align: center"/>
+           
                 <p style="margin-top: 35px"></p>
                 <!-- <h style="font-size: 1.5vw">Name</h>                     -->
                 <textarea class="form-control" type="text" name="profileName1" style="font-size: 1em">{{profile.profileName1}}</textarea>

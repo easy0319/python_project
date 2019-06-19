@@ -1,5 +1,9 @@
 from flask import Blueprint, request, render_template, session, redirect, url_for
 from .db import connect_mongo, profileDAO
+from werkzeug import secure_filename
+
+def dict_merge(x, y):
+    return {**x, **y}
 
 db_connection = connect_mongo.ConnectDB().db
 profile = profileDAO.Profile(db_connection)
@@ -19,8 +23,14 @@ def profileUpdate():
 
         if request.method == 'POST':
                 if 'userEmail' in session and session['userEmail'] == 'admin@admin':
-                        profile.profileUpdate(request.form.to_dict(flat='true'))
-                        return redirect(url_for('postsAPI.base'))
+                        f = request.files['file']
+                        if f.filename == '':
+                                profile.profileUpdate('', request.form.to_dict(flat='true'))
+                                return redirect(url_for('postsAPI.base'))
+                        else:
+                                f.save("./static/img/" + secure_filename(f.filename))
+                                profile.profileUpdate(f.filename,request.form.to_dict(flat='true'))
+                                return redirect(url_for('postsAPI.base'))
                 else:
                         return redirect(url_for('postsAPI.base'))
 
