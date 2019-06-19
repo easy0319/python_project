@@ -28,7 +28,7 @@
                     <p class="" style="font-size: 1em">{{comment.author}}</p>
                     <p class="" style="font-size: 1em">{{comment.comment}}</p>
                     <p class="" style="font-size: 1em">{{comment.date}}</p>
-                    {% if commentInfo == comment.author %}
+                    {% if commentInfo == comment.author or session.userEmail == 'admin@admin' %}
                         {% include 'commentdelete.html' %}
                     {% endif %}
                     <hr class="my-4">
