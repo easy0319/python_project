@@ -1,5 +1,6 @@
 from flask import Blueprint, request, render_template, session, redirect, url_for
 from .db import connect_mongo, postsDAO, profileDAO
+from werkzeug import secure_filename
 import time
 
 def dict_merge(x, y):
@@ -52,10 +53,17 @@ def posting():
 
     if request.method == 'POST':
         if 'userEmail' in session and session['userEmail'] == 'admin@admin':
+            f = request.files['post_file']
             if request.form['postTitle'] != '' and request.form['postContent'] != '':
-                now = time.strftime("%Y-%m-%d %H:%M")
-                obj_id = posts.postCreate(dict_merge({"author":session['userEmail'], "date":now}, request.form.to_dict(flat=True)))
-                return redirect(url_for('postsAPI.base'))
+                if f.filename == '':
+                    now = time.strftime("%Y-%m-%d %H:%M")
+                    obj_id = posts.postCreate(dict_merge({"img":''}, dict_merge({"author":session['userEmail'], "date":now}, request.form.to_dict(flat=True))))
+                    return redirect(url_for('postsAPI.base'))
+                else:
+                    now = time.strftime("%Y-%m-%d %H:%M")
+                    f.save("./static/img/" + secure_filename(f.filename))
+                    obj_id = posts.postCreate(dict_merge({"img":f.filename}, dict_merge({"author":session['userEmail'], "date":now}, request.form.to_dict(flat=True))))
+                    return redirect(url_for('postsAPI.base'))
             else:
                 return redirect(url_for('postsAPI.posting'))
         else:
@@ -64,8 +72,14 @@ def posting():
 @postsAPI.route('/post/update', methods=['POST'])
 def postUpdate():
     if 'userEmail' in session and session['userEmail'] == 'admin@admin':
-        posts.postUpdate(request.form.to_dict(flat=True))
-        return redirect(url_for('postsAPI.postMore',postTitle = request.form['postTitle'], postContent = request.form['postContent']))
+        f = request.files['post_file']
+        if f.filename == '':
+            posts.postUpdate('', request.form.to_dict(flat=True))
+            return redirect(url_for('postsAPI.postMore',postTitle = request.form['postTitle'], postContent = request.form['postContent']))
+        else:
+            f.save("./static/img/" + secure_filename(f.filename))
+            posts.postUpdate(f.filename, request.form.to_dict(flat=True))
+            return redirect(url_for('postsAPI.postMore',postTitle = request.form['postTitle'], postContent = request.form['postContent']))
     else:
         return redirect(url_for('postsAPI.base'))
       

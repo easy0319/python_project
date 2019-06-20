@@ -5,7 +5,7 @@ class Posts():
 	def __init__(self,db):
 		self.posts = pymongo.collection.Collection(db, 'Posts')
 
-	def postCreate(self,postDict):
+	def postCreate(self, postDict):
 		try:
 			obj_id = self.posts.insert_one(postDict).inserted_id
 			return obj_id
@@ -19,13 +19,23 @@ class Posts():
 		except:
 			return False
 
-	def postUpdate(self,postDict):
-		self.posts.find_and_modify(
-			{"_id": ObjectId(postDict["obj_id"])},
-			{"$set":{"postTitle":postDict["postTitle"],"postContent":postDict["postContent"]}},
-			upsert=False
-			)
-		return True
+	def postUpdate(self, file, postDict):
+		if file == '':
+			self.posts.find_and_modify(
+				{"_id": ObjectId(postDict["obj_id"])},
+				{"$set":{"postTitle":postDict["postTitle"],"postContent":postDict["postContent"]}},
+				upsert=False
+				)
+			return True
+		else:
+			self.posts.find_and_modify(
+				{"_id": ObjectId(postDict["obj_id"])},
+				{"$set":{"postTitle":postDict["postTitle"],
+				"postContent":postDict["postContent"],
+				"img":file}},
+				upsert=False
+				)
+			return True
 
 	def getAllposts(self):
 		try:

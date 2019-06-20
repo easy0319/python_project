@@ -16,7 +16,7 @@
               </div>
         
               <div class="modal-body">
-                <form action="/post/update" method="POST">
+                <form action="/post/update" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="postTitle">Title</label>
                     <input type="text" name="postTitle" class="form-control" id="postTitle" placeholder="Enter title." value="{{post.postTitle}}">
@@ -24,6 +24,10 @@
                   <div class="form-group">
                     <label for="postContent">Content</label>
                     <textarea rows="10" name="postContent" class="form-control" id="postContent" placeholder="Enter Content.">{{post.postContent}}</textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="postImg">Image</label>
+                    <input class="form-control" type="file" name="post_file"/>
                   </div>
               </div>
         
