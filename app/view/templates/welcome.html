@@ -2,7 +2,7 @@
 {% block content %}
 <div class = 'container col-md-11'>
 	<div class="row justify-content-around">
-        <div class="col-md-3 form-control jumbotron shadow-lg text-center" style="height: auto; max-height: 500px; max-width: 80%">
+        <div class="col-md-3 form-control jumbotron shadow-lg text-center" style="height: auto; max-height: 400px; max-width: 80%">
             {% for profile in profile %}
                 <img src="static/img/{{profile.profileImg}}" alt="photo" style="max-width: 35%; height: auto; border-radius: 50%;"/>
                 <p></p>
@@ -29,22 +29,17 @@
                     {% include "postview.html" %}
                 {% endwith %}
             </div>
-            {% if postcount > 6 %}
+
             <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <button class="btn btn-outline-dark btn-sm page-link btn-hover" 
-                        onclick="location.href='/1'"
-                        style="color:black;
-                        margin-right:5px;
-                        border:1px solid black;">1</a></li>
-                <li class="page-item">
-                    <button class="btn btn-outline-dark btn-sm page-link btn-hover" 
-                        onclick="location.href='/2'"
-                        style="color:black;
-                        margin-right:5px;
-                        border:1px solid black;">2</a></li>        
+            {% for postcount in range((postcount/6)|int + 1) %}
+                    <li class="page-item">
+                        <button class="btn btn-outline-dark btn-sm page-link btn-hover" 
+                            onclick="location.href='/{{loop.index}}'"
+                            style="color:black;
+                            margin-right:5px;
+                            border:1px solid black;">{{loop.index}}</a></li>
+            {% endfor %}        
             </ul>
-            {% endif %}
         </div>
 	</div>
     <p/>
