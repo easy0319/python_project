@@ -29,16 +29,27 @@
                     {% include "postview.html" %}
                 {% endwith %}
             </div>
-
+            
             <ul class="pagination justify-content-center">
-            {% for postcount in range((postcount/6)|int + 1) %}
-                    <li class="page-item">
-                        <button class="btn btn-outline-dark btn-sm page-link btn-hover" 
-                            onclick="location.href='/{{loop.index}}'"
-                            style="color:black;
-                            margin-right:5px;
-                            border:1px solid black;">{{loop.index}}</a></li>
-            {% endfor %}        
+            {% if postcount % 6 != 0 %}
+                {% for postcount in range((postcount / 6 + 1)|int) %}
+                        <li class="page-item">
+                            <button class="btn btn-outline-dark btn-sm page-link btn-hover" 
+                                onclick="location.href='/{{loop.index}}'"
+                                style="color:black;
+                                margin-right:5px;
+                                border:1px solid black;">{{loop.index}}</a></li>
+                {% endfor %}
+            {% else %}
+                {% for postcount in range((postcount / 6)|int) %}
+                <li class="page-item">
+                    <button class="btn btn-outline-dark btn-sm page-link btn-hover" 
+                        onclick="location.href='/{{loop.index}}'"
+                        style="color:black;
+                        margin-right:5px;
+                        border:1px solid black;">{{loop.index}}</a></li>
+                {% endfor %}
+            {% endif %}
             </ul>
         </div>
 	</div>
