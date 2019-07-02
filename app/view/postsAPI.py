@@ -35,7 +35,7 @@ def postPage(num):
             postcount = posts.getPostsCount()
             pro = profile.profileValidation()
             info = session['userEmail'].split('@')
-            return render_template('welcome.html', info = info[0], post = post, postcount = postcount, profile = pro)
+            return render_template('welcome.html', info = info[0], post = post, postcount = postcount, profile = pro, num = num)
         else:
             post = posts.getAllposts()
             postcount = posts.getPostsCount()
