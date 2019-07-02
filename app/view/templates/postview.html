@@ -1,14 +1,14 @@
 <!-- {{('/' + ((postcount / 6+1)|int)|string)}} -->
-{% for post in post %}
+{% for i in range(postcount) %}
 {% if (request.path == '/') or (request.path == '/1') %}
   {% if loop.index <= 6 %}
     <div class="card shadow-lg" style="width: 17rem; margin: 0.7em;">
-        <img src="static/img/{{post.img}}" class="card-img-top" alt="photo" style="max-width: 100%; height: auto;"/>
+        <img src="static/img/{{post[i].img}}" class="card-img-top" alt="photo" style="max-width: 100%; height: auto;"/>
         <div class="card-body">
-          <h5 class="card-title">{{post.postTitle}}</h5>
+          <h5 class="card-title">{{post[i].postTitle}}</h5>
 
           {% if session.userEmail %}
-            <button type="submit" class="btn btn-outline-dark btn-sm float-right" onclick="location.href='/postmore/{{post.postTitle}}/{{post.postContent}}'" style="margin-right:5px;">
+            <button type="submit" class="btn btn-outline-dark btn-sm float-right" onclick="location.href='/postmore/{{post[i].postTitle}}/{{post[i].postContent}}'" style="margin-right:5px;">
               more
             </button>
           {% else %}
@@ -17,15 +17,15 @@
         </div>
     </div>
   {% endif %}
-{% elif request.path == '/2'%}
-  {% if loop.index > 6 and loop.index <= 12 %}
+{% elif request.path == ('/' + num) %}
+  {% if loop.index > 6 * (num|int - 1) and loop.index <= 6 * num|int %}
     <div class="card shadow-lg" style="width: 17rem; margin: 0.7em;">
-        <img src="static/img/{{post.img}}" class="card-img-top" alt="photo" style="max-width: 100%; height: auto;"/>
+        <img src="static/img/{{post[i].img}}" class="card-img-top" alt="photo" style="max-width: 100%; height: auto;"/>
         <div class="card-body">
-          <h5 class="card-title">{{post.postTitle}}</h5>
+          <h5 class="card-title">{{post[i].postTitle}}</h5>
 
           {% if session.userEmail %}
-            <button type="submit" class="btn btn-outline-dark btn-sm float-right" onclick="location.href='/postmore/{{post.postTitle}}/{{post.postContent}}'" style="margin-right:5px;">
+            <button type="submit" class="btn btn-outline-dark btn-sm float-right" onclick="location.href='/postmore/{{post[i].postTitle}}/{{post[i].postContent}}'" style="margin-right:5px;">
               more
             </button>
           {% else %}
